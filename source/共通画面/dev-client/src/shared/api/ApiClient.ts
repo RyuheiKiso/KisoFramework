@@ -223,3 +223,62 @@ export class ApiClient {
     }
   }
 }
+
+/**
+ * 使用例
+ */
+
+// --- REST API の例 ---
+/*
+const restClient = new ApiClient({
+  baseUrl: 'https://api.example.com',
+  apiType: 'REST'
+});
+
+// GET
+restClient.get('/users/1').then(user => {
+  console.log(user);
+});
+
+// POST
+restClient.post('/users', { name: 'Taro' }).then(result => {
+  console.log(result);
+});
+*/
+
+// --- gRPC API の例 ---
+/*
+import { createGrpcClient } from './GrpcClientFactory';
+
+const grpcClient = createGrpcClient(
+  'path/to/your.proto',
+  'yourPackage',
+  'YourService',
+  'localhost:50051'
+);
+
+const apiClient = new ApiClient({
+  apiType: 'gRPC',
+  grpcClient
+});
+
+// gRPCメソッド呼び出し
+apiClient.grpcCall('YourMethod', { id: 1 }).then(response => {
+  console.log(response);
+});
+*/
+
+// --- REST/gRPC自動切替の例 ---
+/*
+const client = new ApiClient({
+  baseUrl: 'https://api.example.com',
+  apiType: 'REST'
+});
+
+client.call({
+  endpoint: '/users/1',
+  method: 'GET'
+}).then(user => {
+  console.log(user);
+});
+*/

@@ -30,3 +30,22 @@ export function createGrpcClient(
   // gRPCクライアントを生成して返却
   return new Service(address, grpc.credentials.createInsecure());
 }
+
+/**
+ * 使用例
+ */
+/*
+import { createGrpcClient } from './GrpcClientFactory';
+
+const client = createGrpcClient(
+  'path/to/your.proto',
+  'yourPackage',
+  'YourService',
+  'localhost:50051'
+);
+
+// client.YourMethod({ id: 1 }, (err, response) => {
+//   if (err) console.error(err);
+//   else console.log(response);
+// });
+*/
