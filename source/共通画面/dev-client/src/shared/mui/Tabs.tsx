@@ -19,7 +19,7 @@ export interface TabItem {
   /** タブのaria-label（アクセシビリティ用、任意） */
   _ariaLabel?: string;
   /** タブの追加クラス名（任意） */
-  _className?: string;
+  _class?: string;
   /** タブのid属性（任意） */
   _id?: string;
   /** タブのstyle属性（任意） */
@@ -45,7 +45,7 @@ export interface MuiTabsProps {
   /** タブの下に表示する子要素（任意） */
   _children?: React.ReactNode;
   /** Tabsコンポーネントの追加クラス名（任意） */
-  _className?: string;
+  _class?: string;
   /** Tabsのvariant（標準: 'standard', 'scrollable', 'fullWidth'） */
   _variant?: 'standard' | 'scrollable' | 'fullWidth';
   /** Tabsのorientation（標準: 'horizontal', 'vertical'） */
@@ -88,7 +88,7 @@ const MuiTabs: React.FC<MuiTabsProps> = ({
   _onChange,
   _tabs,
   _children,
-  _className,
+  _class,
   _variant = 'standard',
   _orientation = 'horizontal',
   _color = 'primary',
@@ -109,7 +109,7 @@ const MuiTabs: React.FC<MuiTabsProps> = ({
       <Tabs
         value={_value}
         onChange={_onChange}
-        className={_className}
+        className={_class}
         variant={_variant}
         orientation={_orientation}
         textColor={_color}
@@ -136,7 +136,7 @@ const MuiTabs: React.FC<MuiTabsProps> = ({
             value: tab._value,
             disabled: tab._disabled,
             'aria-label': tab._ariaLabel,
-            className: tab._className,
+            className: tab._class,
             id: tab._id,
             style: tab._style,
             ..._tabProps,

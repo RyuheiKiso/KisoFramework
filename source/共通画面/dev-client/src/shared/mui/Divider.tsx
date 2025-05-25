@@ -16,7 +16,7 @@ type DividerProps = {
   /** Divider内に表示する子要素 */
   _children?: React.ReactNode;
   /** カスタムクラス名 */
-  _className?: string;
+  _class?: string;
   /** インラインスタイル */
   _style?: React.CSSProperties;
   /** 色（primary, secondary, inherit, custom colorも可） */
@@ -66,7 +66,7 @@ const CustomDivider: React.FC<DividerProps> = ({
   _flexItem,
   _variant,
   _children,
-  _className,
+  _class,
   _style,
   _color,
   _light,
@@ -91,7 +91,7 @@ const CustomDivider: React.FC<DividerProps> = ({
       orientation={_orientation}
       flexItem={_flexItem}
       variant={_variant}
-      className={_className}
+      className={_class}
       style={{ ..._style, opacity: _opacity }}
       color={_color}
       light={_light}

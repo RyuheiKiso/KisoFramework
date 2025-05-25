@@ -13,7 +13,7 @@ type BoxProps = {
   /** レンダリングする要素（例: 'div', 'span'など） */
   _component?: React.ElementType;
   /** クラス名 */
-  _className?: string;
+  _class?: string;
   /** id属性 */
   _id?: string;
   /** onClickイベントハンドラ */
@@ -58,7 +58,7 @@ type BoxProps = {
  * @param _children 子要素
  * @param _sx スタイル
  * @param _component レンダリングする要素
- * @param _className クラス名
+ * @param _class クラス名
  * @param _id id属性
  * @param _onClick クリックイベント
  * @param _ref ref属性
@@ -82,7 +82,7 @@ const CustomBox: React.FC<BoxProps> = ({
   _children,
   _sx,
   _component,
-  _className,
+  _class,
   _id,
   _onClick,
   _ref,
@@ -107,7 +107,7 @@ const CustomBox: React.FC<BoxProps> = ({
     <Box
       sx={_sx}
       {...(_component ? { component: _component } : {})}
-      className={_className}
+      className={_class}
       id={_id}
       onClick={_onClick}
       ref={_ref}

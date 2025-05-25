@@ -25,9 +25,9 @@ export interface _CheckboxProps {
   /** チェックボックスのvalue属性 */
   _value?: string | number;
   /** ラベルのclassName */
-  _labelClassName?: string;
+  _labelClass?: string;
   /** チェックボックスのclassName */
-  _className?: string;
+  _class?: string;
   /** チェックボックスのstyle */
   _style?: React.CSSProperties;
   /** ラベルのstyle */
@@ -83,8 +83,8 @@ export const MuiCheckbox: React.FC<_CheckboxProps> = ({
   _id,
   _name,
   _value,
-  _labelClassName,
-  _className,
+  _labelClass,
+  _class,
   _style,
   _labelStyle,
   _inputProps,
@@ -108,7 +108,7 @@ export const MuiCheckbox: React.FC<_CheckboxProps> = ({
 }) => {
   // ラベル位置に応じて配置を切り替え
   return (
-    <label className={_labelClassName} style={_labelStyle}>
+    <label className={_labelClass} style={_labelStyle}>
       {_labelPlacement === 'start' && _label}
       <Checkbox
         checked={_checked}
@@ -119,7 +119,7 @@ export const MuiCheckbox: React.FC<_CheckboxProps> = ({
         id={_id}
         name={_name}
         value={_value}
-        className={_className}
+        className={_class}
         style={_style}
         inputProps={{
           ..._inputProps,

@@ -20,7 +20,7 @@ export interface CommonPaperProps {
   /**
    * 追加のクラス名
    */
-  _className?: string;
+  _class?: string;
   /**
    * スタイルオブジェクト
    */
@@ -100,7 +100,7 @@ export interface CommonPaperProps {
 const CommonPaper: React.FC<CommonPaperProps> = ({
   _children,
   _elevation = 1,
-  _className,
+  _class,
   _style,
   _sx,
   _square = false,
@@ -122,7 +122,7 @@ const CommonPaper: React.FC<CommonPaperProps> = ({
   return (
     <Paper
       elevation={_elevation}
-      className={_className}
+      className={_class}
       style={_style}
       sx={_sx}
       square={_square}

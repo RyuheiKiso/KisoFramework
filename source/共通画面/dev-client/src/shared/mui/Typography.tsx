@@ -12,7 +12,7 @@ import MuiTypography, { TypographyProps as MuiTypographyProps } from '@mui/mater
  * @property _align テキストのアライメント
  * @property _fontWeight テキストの太さ
  * @property _style テキストの追加スタイル
- * @property _className 追加のクラス名
+ * @property _class 追加のクラス名
  * @property _gutterBottom 下部に余白を追加するか
  * @property _noWrap テキストを折り返さず省略記号を付けるか
  * @property _paragraph 段落として表示するか
@@ -47,7 +47,7 @@ export interface TypographyProps extends Omit<MuiTypographyProps, 'children' | '
   /**
    * 追加のクラス名
    */
-  _className?: string;
+  _class?: string;
   /**
    * 下部に余白を追加するか
    */
@@ -101,7 +101,7 @@ const Typography: React.FC<TypographyProps> = ({
   _align,
   _fontWeight,
   _style,
-  _className,
+  _class,
   _gutterBottom,
   _noWrap,
   _paragraph,
@@ -117,7 +117,7 @@ const Typography: React.FC<TypographyProps> = ({
       color={_color}
       align={_align}
       style={mergedStyle}
-      className={_className}
+      className={_class}
       gutterBottom={_gutterBottom}
       noWrap={_noWrap}
       paragraph={_paragraph}
