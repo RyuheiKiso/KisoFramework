@@ -3,7 +3,7 @@ import React from 'react';
 import Button from '@mui/material/Button';
 
 /**
- * 共通MUIボタンのプロパティ型
+ * 共通MUIボタンのプロパティ型 
  */
 export interface MuiButtonProps {
   /** ボタンに表示する内容（テキストや要素） */
