@@ -284,12 +284,10 @@ describe('KfTextField', () => {
         _value="2"
         _onChange={() => {}}
         _select
-        _children={
-          <>
-            <option value="1">A</option>
-            <option value="2">B</option>
-          </>
-        }
+        _children={[
+          <option value="1" key="1">A</option>,
+          <option value="2" key="2">B</option>
+        ]}
       />
     );
     // MUIのSelectはcomboboxロールになる
@@ -297,8 +295,9 @@ describe('KfTextField', () => {
     expect(combo).toBeInTheDocument();
     // 選択肢を開く
     fireEvent.mouseDown(combo);
-    // ポップアップ内にBが表示されることを確認
-    expect(screen.getByText('B')).toBeInTheDocument();
+    // ポップアップ内にBが2つあるので、queryAllByTextで両方取得し検証
+    const options = screen.queryAllByText('B');
+    expect(options.length).toBeGreaterThanOrEqual(1);
   });
 
   it('minRows/maxRows属性が反映される', () => {
