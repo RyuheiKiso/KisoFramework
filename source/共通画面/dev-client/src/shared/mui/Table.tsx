@@ -300,6 +300,7 @@ const KfTable: React.FC<_TableProps> = ({
                   : undefined
               }
               selected={_selectedRowIndex === idx}
+              aria-selected={_selectedRowIndex === idx}
               className={_rowClassName ? _rowClassName(row, idx) : undefined}
               sx={_bordered ? { border: 1, borderColor: 'grey.300' } : undefined}
               style={{
