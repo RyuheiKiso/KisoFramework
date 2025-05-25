@@ -56,7 +56,7 @@ export interface MuiButtonProps {
   /** ボタンの終了アイコン（右側） */
   _endIcon?: React.ReactNode;
   /** ボタンに付与する追加クラス名 */
-  _class?: string;
+  _className?: string;
   /** ボタンのスタイル（インラインCSS） */
   _style?: React.CSSProperties;
   /** aria-label属性（アクセシビリティ用ラベル） */
@@ -124,7 +124,7 @@ const MuiButton: React.FC<MuiButtonProps> = (props) => {
       startIcon={props._startIcon}
       endIcon={props._endIcon}
       tabIndex={props._tabIndex}
-      className={props._class}
+      className={props._className}
       style={props._style}
       aria-label={props._ariaLabel}
       aria-controls={props._ariaControls}

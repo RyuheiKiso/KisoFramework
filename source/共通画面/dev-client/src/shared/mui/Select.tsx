@@ -48,7 +48,7 @@ interface SelectProps {
   /** sxスタイル（任意） */
   _sx?: SxProps;
   /** クラス名（任意） */
-  _class?: string;
+  _className?: string;
   /** id属性（任意） */
   _id?: string;
   /** name属性（任意） */
@@ -89,7 +89,7 @@ const CustomSelect: React.FC<SelectProps> = ({
   _selectProps,
   _multiple = false,
   _sx,
-  _class,
+  _className,
   _id,
   _name,
   _autoFocus,
@@ -110,7 +110,7 @@ const CustomSelect: React.FC<SelectProps> = ({
       required={_required}
       variant="outlined"
       sx={_sx}
-      className={_class}
+      className={_className}
     >
       {_label && <InputLabel>{_label}</InputLabel>}
       <Select
