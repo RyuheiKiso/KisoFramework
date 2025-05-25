@@ -75,9 +75,9 @@ export class ApiClient {
         body: body ? JSON.stringify(body) : undefined,
         signal: controller.signal,
       });
-    } catch (err) {
+    } catch (err: any) {
       clearTimeout(timeout);
-      if (err instanceof DOMException && err.name === 'AbortError') {
+      if (err.name === 'AbortError') {
         throw new Error('API request timeout');
       }
       throw err;
