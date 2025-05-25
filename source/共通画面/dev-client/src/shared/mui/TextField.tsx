@@ -42,73 +42,73 @@ import TextField from '@mui/material/TextField';
  */
 type Props = {
   /** ラベル */
-  label: string;
+  _label: string;
   /** 入力値 */
-  value: string;
+  _value: string;
   /** 値変更時のイベントハンドラ */
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  _onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   /** 入力タイプ（例: 'text', 'password', 'number' など） */
-  type?: string;
+  _type?: string;
   /** 無効化フラグ */
-  disabled?: boolean;
+  _disabled?: boolean;
   /** エラーフラグ */
-  error?: boolean;
+  _error?: boolean;
   /** ヘルパーテキスト */
-  helperText?: string;
+  _helperText?: string;
   /** プレースホルダー */
-  placeholder?: string;
+  _placeholder?: string;
   /** 必須入力フラグ */
-  required?: boolean;
+  _required?: boolean;
   /** input要素の追加属性（例: maxLength, min, max など） */
-  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+  _inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   /** 自動フォーカス */
-  autoFocus?: boolean;
+  _autoFocus?: boolean;
   /** InputProps: MUI Inputコンポーネントへのprops */
-  InputProps?: object;
+  _InputProps?: object;
   /** InputLabelProps: MUI InputLabelコンポーネントへのprops */
-  InputLabelProps?: object;
+  _InputLabelProps?: object;
   /** FormHelperTextProps: MUI FormHelperTextコンポーネントへのprops */
-  FormHelperTextProps?: object;
+  _FormHelperTextProps?: object;
   /** SelectProps: MUI Selectコンポーネントへのprops */
-  SelectProps?: object;
+  _SelectProps?: object;
   /** 行数（複数行入力時） */
-  multiline?: boolean;
+  _multiline?: boolean;
   /** 最小行数（複数行入力時） */
-  minRows?: number;
+  _minRows?: number;
   /** 最大行数（複数行入力時） */
-  maxRows?: number;
+  _maxRows?: number;
   /** サイズ（'small' | 'medium'） */
-  size?: 'small' | 'medium';
+  _size?: 'small' | 'medium';
   /** フル幅指定 */
-  fullWidth?: boolean;
+  _fullWidth?: boolean;
   /** variant（'outlined' | 'filled' | 'standard'） */
-  variant?: 'outlined' | 'filled' | 'standard';
+  _variant?: 'outlined' | 'filled' | 'standard';
   /** 入力欄のID */
-  id?: string;
+  _id?: string;
   /** テスト用ID */
-  'data-testid'?: string;
+  '_data-testid'?: string;
   /** デフォルト値 */
-  defaultValue?: string;
+  _defaultValue?: string;
   /** 入力不可（readOnly） */
-  readOnly?: boolean;
+  _readOnly?: boolean;
   /** 入力欄の色（'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning'） */
-  color?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
+  _color?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
   /** 入力欄の名前属性 */
-  name?: string;
+  _name?: string;
   /** 入力完了時のイベントハンドラ */
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  _onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   /** フォーカス時のイベントハンドラ */
-  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  _onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
   /** 入力欄の参照 */
-  inputRef?: React.Ref<HTMLInputElement>;
+  _inputRef?: React.Ref<HTMLInputElement>;
   /** 入力欄の自動補完属性 */
-  autoComplete?: string;
+  _autoComplete?: string;
   /** 入力欄の行数（単一行/複数行切替用） */
-  rows?: number;
+  _rows?: number;
   /** 入力欄のselect属性 */
-  select?: boolean;
+  _select?: boolean;
   /** 入力欄のchildren（select時のoption等） */
-  children?: React.ReactNode;
+  _children?: React.ReactNode;
 };
 
 /**
@@ -118,89 +118,89 @@ type Props = {
  * @example
  * ```tsx
  * <MuiTextField
- *   label="ユーザー名"
- *   value={userName}
- *   onChange={e => setUserName(e.target.value)}
- *   required
- *   error={!!error}
- *   helperText={error}
- *   placeholder="ユーザー名を入力してください"
- *   size="small"
+ *   _label="ユーザー名"
+ *   _value={userName}
+ *   _onChange={e => setUserName(e.target.value)}
+ *   _required
+ *   _error={!!error}
+ *   _helperText={error}
+ *   _placeholder="ユーザー名を入力してください"
+ *   _size="small"
  * />
  * ```
  */
 const MuiTextField: React.FC<Props> = ({
-  label,
-  value,
-  onChange,
-  type = 'text',
-  disabled = false,
-  error = false,
-  helperText = '',
-  placeholder = '',
-  required = false,
-  inputProps,
-  autoFocus = false,
-  InputProps,
-  InputLabelProps,
-  FormHelperTextProps,
-  SelectProps,
-  multiline = false,
-  minRows,
-  maxRows,
-  size = 'medium',
-  fullWidth = true,
-  variant = 'outlined',
-  id,
-  'data-testid': dataTestId,
-  defaultValue,
-  readOnly,
-  color = 'primary',
-  name,
-  onBlur,
-  onFocus,
-  inputRef,
-  autoComplete,
-  rows,
-  select = false,
-  children,
+  _label,
+  _value,
+  _onChange,
+  _type = 'text',
+  _disabled = false,
+  _error = false,
+  _helperText = '',
+  _placeholder = '',
+  _required = false,
+  _inputProps,
+  _autoFocus = false,
+  _InputProps,
+  _InputLabelProps,
+  _FormHelperTextProps,
+  _SelectProps,
+  _multiline = false,
+  _minRows,
+  _maxRows,
+  _size = 'medium',
+  _fullWidth = true,
+  _variant = 'outlined',
+  _id,
+  '_data-testid': _dataTestId,
+  _defaultValue,
+  _readOnly,
+  _color = 'primary',
+  _name,
+  _onBlur,
+  _onFocus,
+  _inputRef,
+  _autoComplete,
+  _rows,
+  _select = false,
+  _children,
 }) => {
   // TextFieldコンポーネントを返却
   return (
     <TextField
-      label={label}
-      value={value}
-      onChange={onChange}
-      type={type}
-      disabled={disabled}
-      error={error}
-      helperText={helperText}
-      placeholder={placeholder}
-      required={required}
-      inputProps={{ ...inputProps, readOnly }}
-      autoFocus={autoFocus}
-      InputProps={InputProps}
-      InputLabelProps={InputLabelProps}
-      FormHelperTextProps={FormHelperTextProps}
-      SelectProps={SelectProps}
-      defaultValue={defaultValue}
-      color={color}
-      name={name}
-      onBlur={onBlur}
-      onFocus={onFocus}
-      inputRef={inputRef}
-      autoComplete={autoComplete}
-      rows={rows}
-      select={select}
-      children={children}
-      multiline={multiline}
-      minRows={minRows}
-      maxRows={maxRows}
-      size={size}
-      fullWidth={fullWidth}
-      variant={variant}
-      id={id}
-      data-testid={dataTestId}
+      label={_label}
+      value={_value}
+      onChange={_onChange}
+      type={_type}
+      disabled={_disabled}
+      error={_error}
+      helperText={_helperText}
+      placeholder={_placeholder}
+      required={_required}
+      inputProps={{ ..._inputProps, readOnly: _readOnly }}
+      autoFocus={_autoFocus}
+      InputProps={_InputProps}
+      InputLabelProps={_InputLabelProps}
+      FormHelperTextProps={_FormHelperTextProps}
+      SelectProps={_SelectProps}
+      defaultValue={_defaultValue}
+      color={_color}
+      name={_name}
+      onBlur={_onBlur}
+      onFocus={_onFocus}
+      inputRef={_inputRef}
+      autoComplete={_autoComplete}
+      rows={_rows}
+      select={_select}
+      children={_children}
+      multiline={_multiline}
+      minRows={_minRows}
+      maxRows={_maxRows}
+      size={_size}
+      fullWidth={_fullWidth}
+      variant={_variant}
+      id={_id}
+      data-testid={_dataTestId}
     />
   );
 };
@@ -218,13 +218,13 @@ export default MuiTextField;
  *   const [value, setValue] = useState('');
  *   return (
  *     <MuiTextField
- *       label="メールアドレス"
- *       value={value}
- *       onChange={e => setValue(e.target.value)}
- *       required
- *       helperText="有効なメールアドレスを入力してください"
- *       placeholder="sample@example.com"
- *       size="medium"
+ *       _label="メールアドレス"
+ *       _value={value}
+ *       _onChange={e => setValue(e.target.value)}
+ *       _required
+ *       _helperText="有効なメールアドレスを入力してください"
+ *       _placeholder="sample@example.com"
+ *       _size="medium"
  *     />
  *   );
  * };
