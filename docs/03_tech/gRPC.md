@@ -143,8 +143,8 @@ flowchart TD
     %% 矢印の色を黒にする
     linkStyle default stroke:#222,stroke-width:1.5px,color:#222
 
-    %% 矢印コメントの背景色を灰色にする
-    classDef grayLabel fill:#eee,color:#222,stroke:none;
+    %% 矢印コメントの背景色をさらに薄くする
+    classDef grayLabel fill:#fafafa,color:#222,stroke:none;
     class RESTClient,REST_HTTP,REST_Data,REST_Endpoint,REST_Def,REST_Stream,REST_Type,REST_Ext,RESTServer grayLabel;
     class gRPCClient,gRPC_HTTP,gRPC_Data,gRPC_Service,gRPC_Def,gRPC_Stream,gRPC_Type,gRPC_Ext,gRPCServer grayLabel;
 ```
