@@ -1,0 +1,14 @@
+syntax = "proto3";
+package testPkg;
+
+message TestRequest {
+  int32 id = 1;
+}
+
+message TestResponse {
+  string message = 1;
+}
+
+service TestService {
+  rpc UnaryCall (TestRequest) returns (TestResponse);
+}
