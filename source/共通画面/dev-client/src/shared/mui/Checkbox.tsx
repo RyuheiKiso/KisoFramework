@@ -1,6 +1,7 @@
 // MUIのCheckboxコンポーネントをインポート
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 /**
  * MuiCheckboxコンポーネントのプロパティ
@@ -106,44 +107,67 @@ export const KfCheckbox: React.FC<_CheckboxProps> = ({
   _required,
   _inputRef,
 }) => {
-  // ラベル位置に応じて配置を切り替え
-  return (
-    <label className={_labelClassName} style={_labelStyle}>
-      {_labelPlacement === 'start' && _label}
-      <Checkbox
-        checked={_checked}
-        onChange={_onChange}
-        disabled={_disabled}
-        color={_color}
-        size={_size}
-        id={_id}
-        name={_name}
-        value={_value}
-        className={_className}
-        style={_style}
-        inputProps={{
-          ..._inputProps,
-          'aria-label': _ariaLabel,
-          'aria-labelledby': _ariaLabelledby,
-          'aria-describedby': _ariaDescribedby,
-          tabIndex: _tabIndex,
-          required: _required,
-          onFocus: _onFocus,
-          onBlur: _onBlur,
-        }}
-        onClick={_onClick}
-        indeterminate={_indeterminate}
-        icon={_icon}
-        checkedIcon={_checkedIcon}
-        indeterminateIcon={_indeterminateIcon}
-        disableRipple={_disableRipple}
-        focusRipple={_focusRipple}
-        autoFocus={_autoFocus}
-        inputRef={_inputRef}
-      />
-      {_labelPlacement === 'end' && _label}
-    </label>
+  // indeterminate制御用ref
+  const innerInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const input = (innerInputRef.current || (_inputRef && typeof _inputRef !== 'function' ? _inputRef.current : null));
+    if (input && typeof _indeterminate === 'boolean') {
+      input.indeterminate = _indeterminate;
+    }
+  }, [_indeterminate, _inputRef]);
+
+  const checkboxNode = (
+    <Checkbox
+      checked={_checked}
+      onChange={_onChange}
+      disabled={_disabled}
+      color={_color}
+      size={_size}
+      id={_id}
+      name={_name}
+      value={_value}
+      className={_className}
+      style={_style}
+      inputProps={{
+        ..._inputProps,
+        ...(typeof _ariaLabel !== 'undefined' && { 'aria-label': _ariaLabel }),
+        ...(typeof _ariaLabelledby !== 'undefined' && { 'aria-labelledby': _ariaLabelledby }),
+        ...(typeof _ariaDescribedby !== 'undefined' && { 'aria-describedby': _ariaDescribedby }),
+        ...(typeof _tabIndex !== 'undefined' && { tabIndex: _tabIndex }),
+        ...(typeof _required !== 'undefined' && { required: _required }),
+        ...(typeof _onFocus !== 'undefined' && { onFocus: _onFocus }),
+        ...(typeof _onBlur !== 'undefined' && { onBlur: _onBlur }),
+      }}
+      inputRef={(el: HTMLInputElement) => {
+        innerInputRef.current = el;
+        if (typeof _inputRef === 'function') _inputRef(el);
+        else if (_inputRef && typeof _inputRef !== 'function') (_inputRef as React.MutableRefObject<HTMLInputElement | null>).current = el;
+      }}
+      onClick={_onClick}
+      indeterminate={_indeterminate}
+      icon={_icon}
+      checkedIcon={_checkedIcon}
+      indeterminateIcon={_indeterminateIcon}
+      disableRipple={_disableRipple}
+      focusRipple={_focusRipple}
+      autoFocus={_autoFocus}
+      // inputRefはinputProps.refで制御
+    />
   );
+
+  if (_label) {
+    return (
+      <FormControlLabel
+        control={checkboxNode}
+        label={_label}
+        labelPlacement={_labelPlacement}
+        classes={{ label: _labelClassName }}
+        sx={_labelStyle ? { '& .MuiFormControlLabel-label': _labelStyle } : undefined}
+      />
+    );
+  }
+  return checkboxNode;
 };
 
 /**
