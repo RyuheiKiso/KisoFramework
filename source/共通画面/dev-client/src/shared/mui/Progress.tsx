@@ -146,7 +146,7 @@ type ProgressProps = {
   children?: React.ReactNode;
 };
 
-const Progress: React.FC<ProgressProps> = ({
+const KfProgress: React.FC<ProgressProps> = ({
   _size = 40,
   _color = 'primary',
   _thickness = 3.6,
@@ -228,25 +228,25 @@ const Progress: React.FC<ProgressProps> = ({
   );
 };
 
-export default Progress;
+export default KfProgress;
 
 /**
  * 使用例:
  * 
  * // indeterminate（無限ループ）で表示
- * <Progress />
+ * <KfProgress />
  * 
  * // determinate（進捗値指定）で表示
- * <Progress _value={60} _variant="determinate" />
+ * <KfProgress _value={60} _variant="determinate" />
  * 
  * // サイズ・色・太さ・非表示
- * <Progress _size={60} _color="secondary" _thickness={5} _visible={false} />
+ * <KfProgress _size={60} _color="secondary" _thickness={5} _visible={false} />
  * 
  * // スタイルやクラス名、aria-labelの指定
- * <Progress _className="my-progress" _style={{margin: 8}} _ariaLabel="読み込み中" />
+ * <KfProgress _className="my-progress" _style={{margin: 8}} _ariaLabel="読み込み中" />
  * 
  * // テストIDやID、role、tabIndex、onClickイベントの指定
- * <Progress
+ * <KfProgress
  *   _testId="progress-test"
  *   _id="progress1"
  *   _role="progressbar"
@@ -255,7 +255,7 @@ export default Progress;
  * />
  * 
  * // マウスイベントやフォーカスイベント、title属性の指定
- * <Progress
+ * <KfProgress
  *   _onMouseEnter={() => console.log('enter')}
  *   _onMouseLeave={() => console.log('leave')}
  *   _onFocus={() => console.log('focus')}
@@ -264,7 +264,7 @@ export default Progress;
  * />
  * 
  * // アクセシビリティ属性やMUIのsx、アニメーション制御
- * <Progress
+ * <KfProgress
  *   _ariaValueNow={50}
  *   _ariaValueMin={0}
  *   _ariaValueMax={100}
@@ -275,21 +275,21 @@ export default Progress;
  * />
  * 
  * // ラッパー要素のstyle/className/tag指定
- * <Progress
+ * <KfProgress
  *   _wrapperStyle={{ display: 'inline-block', background: '#eee' }}
  *   _wrapperClassName="progress-wrapper"
  *   _wrapperTag="div"
  * />
  * 
  * // ローディングテキスト（スクリーンリーダー用）を追加
- * <Progress _loadingText="読み込み中です" />
+ * <KfProgress _loadingText="読み込み中です" />
  * 
  * // aria-describedby/aria-labelledby/子要素の追加
- * <Progress
+ * <KfProgress
  *   _ariaDescribedBy="desc"
  *   _ariaLabelledBy="label"
  * >
  *   <span id="desc">追加説明</span>
  *   <span id="label">進捗バー</span>
- * </Progress>
+ * </KfProgress>
  */

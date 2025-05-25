@@ -61,7 +61,7 @@ type DividerProps = {
  * @param props DividerProps
  * @returns Dividerコンポーネント
  */
-const CustomDivider: React.FC<DividerProps> = ({
+const KfDivider: React.FC<DividerProps> = ({
   _orientation,
   _flexItem,
   _variant,
@@ -114,18 +114,18 @@ const CustomDivider: React.FC<DividerProps> = ({
   );
 };
 
-export default CustomDivider;
+export default KfDivider;
 
 /**
  * 使用例
  * 
- * import CustomDivider from './Divider';
+ * import KfDivider from './Divider';
  * 
  * // 横方向のDivider（デフォルト）
- * <CustomDivider />
+ * <KfDivider />
  * 
  * // テキスト付き、縦方向、insetバリアント
- * <CustomDivider
+ * <KfDivider
  *   _orientation="vertical"
  *   _variant="inset"
  *   _children="OR"
@@ -134,26 +134,26 @@ export default CustomDivider;
  * />
  * 
  * // primary色、lightスタイル、flexItem有効
- * <CustomDivider
+ * <KfDivider
  *   _color="primary"
  *   _light
  *   _flexItem
  * />
  * 
  * // absolute配置、テキスト右寄せ、カスタムdata属性
- * <CustomDivider
+ * <KfDivider
  *   _absolute
  *   _textAlign="right"
  *   data-testid="divider-test"
  * />
  * 
  * // 不透明度を指定
- * <CustomDivider
+ * <KfDivider
  *   _opacity={0.5}
  * />
  * 
  * // componentをliタグに変更し、idとイベントを付与
- * <CustomDivider
+ * <KfDivider
  *   _component="li"
  *   _id="divider-li"
  *   _onClick={() => alert('clicked')}

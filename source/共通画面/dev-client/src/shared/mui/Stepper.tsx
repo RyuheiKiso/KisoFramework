@@ -72,7 +72,7 @@ type StepperProps = {
  * @param props StepperProps
  * @returns JSX.Element
  */
-const CustomStepper: React.FC<StepperProps> = ({
+const KfStepper: React.FC<StepperProps> = ({
   _steps,
   _activeStep,
   _stepContents,
@@ -182,12 +182,12 @@ const CustomStepper: React.FC<StepperProps> = ({
   );
 };
 
-export default CustomStepper;
+export default KfStepper;
 
 /**
  * 使用例:
  * 
- * import CustomStepper from './Stepper';
+ * import KfStepper from './Stepper';
  * import CheckCircleIcon from '@mui/icons-material/CheckCircle';
  * 
  * function Example() {
@@ -229,7 +229,7 @@ export default CustomStepper;
  *   const [activeStep, setActiveStep] = React.useState(0);
  * 
  *   return (
- *     <CustomStepper
+ *     <KfStepper
  *       _steps={steps}
  *       _activeStep={activeStep}
  *       _stepContents={contents}

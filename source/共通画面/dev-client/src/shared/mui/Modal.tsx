@@ -160,7 +160,7 @@ interface _ModalProps {
  * @param _onTransitionEnter トランジション開始時コールバック
  * @param _onTransitionExited トランジション終了時コールバック
  */
-const MuiModal: React.FC<_ModalProps> = ({
+const KfModal: React.FC<_ModalProps> = ({
   _open,
   _onClose,
   _children,
@@ -225,20 +225,20 @@ const MuiModal: React.FC<_ModalProps> = ({
   );
 };
 
-export default MuiModal;
+export default KfModal;
 
 /**
  * 使用例:
  * 
  * ```tsx
- * import MuiModal from './Modal';
+ * import KfModal from './Modal';
  * 
  * function Example() {
  *   const [open, setOpen] = React.useState(false);
  *   return (
  *     <>
  *       <button onClick={() => setOpen(true)}>Open Modal</button>
- *       <MuiModal
+ *       <KfModal
  *         _open={open}
  *         _onClose={() => setOpen(false)}
  *         _sx={{
@@ -266,7 +266,7 @@ export default MuiModal;
  *       >
  *         <h2 id="modal-title">タイトル</h2>
  *         <p id="modal-description">ここに内容を記載します。</p>
- *       </MuiModal>
+ *       </KfModal>
  *     </>
  *   );
  * }

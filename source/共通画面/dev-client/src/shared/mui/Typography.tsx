@@ -94,7 +94,7 @@ export interface TypographyProps extends Omit<MuiTypographyProps, 'children' | '
  * @param props TypographyProps
  * @returns Typography要素
  */
-const Typography: React.FC<TypographyProps> = ({
+const KfTypography: React.FC<TypographyProps> = ({
   _children,
   _variant,
   _color,
@@ -130,17 +130,17 @@ const Typography: React.FC<TypographyProps> = ({
   );
 };
 
-export default Typography;
+export default KfTypography;
 
 // ---------------------------------------------
 // 使用例
 // 
 // import Typography from './Typography';
 //
-// <Typography _variant="h5" _color="secondary" _fontWeight="bold" _gutterBottom>
+// <KfTypography _variant="h5" _color="secondary" _fontWeight="bold" _gutterBottom>
 //   サンプル見出し
-// </Typography>
+// </KfTypography>
 //
-// <Typography _variant="body2" _style={{ marginTop: 12 }} _noWrap>
+// <KfTypography _variant="body2" _style={{ marginTop: 12 }} _noWrap>
 //   サンプル本文
-// </Typography>
+// </KfTypography>

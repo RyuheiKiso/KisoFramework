@@ -79,7 +79,7 @@ interface SwitchProps {
  * @param props SwitchProps
  * @returns JSX.Element
  */
-const Switch: React.FC<SwitchProps> = ({
+const KfSwitch: React.FC<SwitchProps> = ({
   _checked,
   _onChange,
   _disabled = false,
@@ -199,13 +199,13 @@ const Switch: React.FC<SwitchProps> = ({
   </label>
 );
 
-export default Switch;
+export default KfSwitch;
 
 /**
  * 使用例
  * 
  * ```tsx
- * import Switch from './Switch';
+ * import KfSwitch from './Switch';
  * import React, { useRef, useState } from 'react';
  * import CheckIcon from '@mui/icons-material/Check';
  * import CloseIcon from '@mui/icons-material/Close';
@@ -214,7 +214,7 @@ export default Switch;
  *   const [checked, setChecked] = useState(false);
  *   const inputRef = useRef<HTMLInputElement>(null);
  *   return (
- *     <Switch
+ *     <KfSwitch
  *       _checked={checked}
  *       _onChange={(_, v) => setChecked(v)}
  *       _label="有効"

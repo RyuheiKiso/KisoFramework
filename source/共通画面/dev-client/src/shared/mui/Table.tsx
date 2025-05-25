@@ -204,7 +204,7 @@ export interface _TableProps {
  * @param props テーブルプロパティ
  * @returns テーブル要素
  */
-const MuiTable: React.FC<_TableProps> = ({
+const KfTable: React.FC<_TableProps> = ({
   _columns,
   _rows,
   _bordered = false,
@@ -366,13 +366,13 @@ const MuiTable: React.FC<_TableProps> = ({
   </TableContainer>
 );
 
-export default MuiTable;
+export default KfTable;
 
 /**
  * 使用例
  *
  * ```tsx
- * import MuiTable from './Table';
+ * import KfTable from './Table';
  *
  * const columns = ['名前', '年齢', '住所'];
  * const rows = [
@@ -383,7 +383,7 @@ export default MuiTable;
  *   { 名前: '合計', 年齢: 45, 住所: '' }
  * ];
  *
- * <MuiTable
+ * <KfTable
  *   _columns={columns}
  *   _rows={rows}
  *   _footerRows={footerRows}

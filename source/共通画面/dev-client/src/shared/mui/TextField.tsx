@@ -129,7 +129,7 @@ type Props = {
  * />
  * ```
  */
-const MuiTextField: React.FC<Props> = ({
+const KfTextField: React.FC<Props> = ({
   _label,
   _value,
   _onChange,
@@ -205,19 +205,19 @@ const MuiTextField: React.FC<Props> = ({
   );
 };
 
-export default MuiTextField;
+export default KfTextField;
 
 /**
  * 使用例:
  * 
  * ```tsx
- * import MuiTextField from './shared/mui/TextField';
+ * import KfTextField from './shared/mui/TextField';
  * import React, { useState } from 'react';
  * 
  * const Example = () => {
  *   const [value, setValue] = useState('');
  *   return (
- *     <MuiTextField
+ *     <KfTextField
  *       _label="メールアドレス"
  *       _value={value}
  *       _onChange={e => setValue(e.target.value)}

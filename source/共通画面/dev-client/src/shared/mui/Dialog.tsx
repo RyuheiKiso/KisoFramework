@@ -148,7 +148,7 @@ export interface _DialogProps {
   _autoFocusCancel?: boolean;
 }
 
-const CustomDialog: React.FC<_DialogProps> = ({
+const KfDialog: React.FC<_DialogProps> = ({
   _open,
   _title,
   _children,
@@ -244,13 +244,13 @@ const CustomDialog: React.FC<_DialogProps> = ({
   );
 };
 
-export default CustomDialog;
+export default KfDialog;
 
 /**
  * 使用例
  * 
  * // シンプルなダイアログ
- * <CustomDialog
+ * <KfDialog
  *   _open={dialogOpen}
  *   _title="確認"
  *   _children="本当に削除しますか？"
@@ -259,7 +259,7 @@ export default CustomDialog;
  * />
  * 
  * // カスタマイズ例
- * <CustomDialog
+ * <KfDialog
  *   _open={dialogOpen}
  *   _title="エラー"
  *   _children={<span style={{ color: 'red' }}>エラーが発生しました</span>}
@@ -286,7 +286,7 @@ export default CustomDialog;
  * />
  * 
  * // キャンセルボタンにautoFocusを付与
- * <CustomDialog
+ * <KfDialog
  *   _open={dialogOpen}
  *   _title="キャンセル確認"
  *   _children="本当にキャンセルしますか？"

@@ -74,7 +74,7 @@ interface SelectProps {
 /**
  * MUI Selectをラップしたカスタムセレクト
  */
-const CustomSelect: React.FC<SelectProps> = ({
+const KfSelect: React.FC<SelectProps> = ({
   _value,
   _onChange,
   _options,
@@ -164,12 +164,12 @@ const CustomSelect: React.FC<SelectProps> = ({
   );
 };
 
-export default CustomSelect;
+export default KfSelect;
 
 /**
  * 使用例:
  *
- * import CustomSelect from './Select';
+ * import KfSelect from './Select';
  * import HomeIcon from '@mui/icons-material/Home';
  *
  * const options = [
@@ -180,7 +180,7 @@ export default CustomSelect;
  *
  * // 単一選択
  * const [value, setValue] = React.useState('');
- * <CustomSelect
+ * <KfSelect
  *   _value={value}
  *   _onChange={e => setValue(e.target.value)}
  *   _options={options}
@@ -199,7 +199,7 @@ export default CustomSelect;
  *
  * // 複数選択
  * const [multi, setMulti] = React.useState<string[]>([]);
- * <CustomSelect
+ * <KfSelect
  *   _value={multi}
  *   _onChange={e => setMulti(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)}
  *   _options={options}
@@ -210,7 +210,7 @@ export default CustomSelect;
  * />
  *
  * // カスタムMenuItemレンダリング
- * <CustomSelect
+ * <KfSelect
  *   _value={value}
  *   _onChange={e => setValue(e.target.value)}
  *   _options={options}

@@ -6,7 +6,7 @@ import type { SxProps, Theme } from '@mui/material/styles';
 /**
  * 共通Paperコンポーネントのプロパティ
  */
-export interface CommonPaperProps {
+export interface KfPaperProps {
   /**
    * Paperの子要素
    */
@@ -94,10 +94,10 @@ export interface CommonPaperProps {
 
 /**
  * 共通Paperコンポーネント
- * @param props CommonPaperProps
+ * @param props KfPaperProps
  * @returns Paperコンポーネント
  */
-const CommonPaper: React.FC<CommonPaperProps> = ({
+const KfPaper: React.FC<KfPaperProps> = ({
   _children,
   _elevation = 1,
   _className,
@@ -145,48 +145,48 @@ const CommonPaper: React.FC<CommonPaperProps> = ({
   );
 };
 
-export default CommonPaper;
+export default KfPaper;
 
 /**
  * 使用例:
  *
  * // 基本的な使い方
- * <CommonPaper _children={<div>内容</div>} />
+ * <KfPaper _children={<div>内容</div>} />
  *
  * // elevation, variant, style, classNameなどを指定
- * <CommonPaper _elevation={3} _variant="outlined" _style={{ padding: 16 }} _className="my-paper">
+ * <KfPaper _elevation={3} _variant="outlined" _style={{ padding: 16 }} _className="my-paper">
  *   <span>カスタム内容</span>
- * </CommonPaper>
+ * </KfPaper>
  *
  * // sxプロパティでスタイル指定
- * <CommonPaper _sx={{ m: 2, p: 2, bgcolor: 'grey.100' }}>
+ * <KfPaper _sx={{ m: 2, p: 2, bgcolor: 'grey.100' }}>
  *   <p>sxによるスタイル</p>
- * </CommonPaper>
+ * </KfPaper>
  *
  * // sectionタグとして利用し、aria属性も付与
- * <CommonPaper _component="section" _ariaLabel="セクション" _tabIndex={0}>
+ * <KfPaper _component="section" _ariaLabel="セクション" _tabIndex={0}>
  *   <h2>セクションタイトル</h2>
  *   <p>説明文</p>
- * </CommonPaper>
+ * </KfPaper>
  *
  * // クリックイベントを利用
- * <CommonPaper _onClick={() => alert('クリックされました')}>
+ * <KfPaper _onClick={() => alert('クリックされました')}>
  *   <div>クリック可能なPaper</div>
- * </CommonPaper>
+ * </KfPaper>
  *
  * // refやonMouseEnter/onMouseLeaveを利用
  * const paperRef = React.useRef<HTMLDivElement>(null);
- * <CommonPaper
+ * <KfPaper
  *   _ref={paperRef}
  *   _onMouseEnter={() => console.log('マウスオーバー')}
  *   _onMouseLeave={() => console.log('マウスアウト')}
  * >
  *   <div>マウスイベント対応Paper</div>
- * </CommonPaper>
+ * </KfPaper>
  *
  * // colorプロパティを利用（MUI v5以降）
- * <CommonPaper _color="primary">
+ * <KfPaper _color="primary">
  *   <div>色付きPaper</div>
- * </CommonPaper>
+ * </KfPaper>
  *
  */

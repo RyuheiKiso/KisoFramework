@@ -34,7 +34,7 @@ import Button from '@mui/material/Button';
  * @property [data-*] ボタンのデータ属性（data-*）
  * @property [key: string] その他のButtonProps（MUI Buttonの全プロパティを許容）
  */
-export interface MuiButtonProps {
+export interface KfButtonProps {
   /** ボタンに表示する内容（テキストや要素） */
   _children: React.ReactNode;
   /** クリック時のイベントハンドラ */
@@ -97,11 +97,11 @@ export interface MuiButtonProps {
 
 /**
  * 共通MUIボタンコンポーネント
- * @param props MuiButtonProps
+ * @param props KfButtonProps
  * @returns MUIボタン
  * @example
  * ```tsx
- * <MuiButton
+ * <KfButton
  *   _children="保存"
  *   _onClick={() => alert('保存しました')}
  *   _variant="contained"
@@ -111,7 +111,7 @@ export interface MuiButtonProps {
  * />
  * ```
  */
-const MuiButton: React.FC<MuiButtonProps> = (props) => {
+const KfButton: React.FC<KfButtonProps> = (props) => {
   return (
     <Button
       variant={props._variant || 'contained'}
@@ -156,17 +156,17 @@ const MuiButton: React.FC<MuiButtonProps> = (props) => {
   );
 };
 
-export default MuiButton;
+export default KfButton;
 
 /**
  * 使用例:
  * 
  * ```tsx
- * import MuiButton from './shared/mui/button';
+ * import KfButton from './shared/mui/button';
  * import React from 'react';
  * 
  * const Example = () => (
- *   <MuiButton
+ *   <KfButton
  *     _children="送信"
  *     _onClick={() => alert('送信しました')}
  *     _variant="outlined"

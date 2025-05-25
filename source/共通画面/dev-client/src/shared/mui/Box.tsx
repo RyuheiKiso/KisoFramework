@@ -78,7 +78,7 @@ type BoxProps = {
  * @param _onFocus onFocusイベント
  * @param _onBlur onBlurイベント
  */
-const CustomBox: React.FC<BoxProps> = ({
+const KfBox: React.FC<BoxProps> = ({
   _children,
   _sx,
   _component,
@@ -133,14 +133,14 @@ const CustomBox: React.FC<BoxProps> = ({
   );
 };
 
-export default CustomBox;
+export default KfBox;
 
 /**
  * 使用例:
  * 
- * import CustomBox from './Box';
+ * import KfBox from './Box';
  * 
- * <CustomBox
+ * <KfBox
  *   _sx={{ p: 2, backgroundColor: 'lightblue', borderRadius: 2 }}
  *   _component="section"
  *   _className="my-section"
@@ -161,5 +161,5 @@ export default CustomBox;
  *   _onBlur={() => console.log('フォーカス外れ')}
  * >
  *   <p>ここに内容を記載</p>
- * </CustomBox>
+ * </KfBox>
  */

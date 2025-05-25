@@ -53,7 +53,7 @@ export interface SnackbarProps {
  * @param props SnackbarProps
  * @returns JSX.Element
  */
-const CommonSnackbar: React.FC<SnackbarProps> = ({
+const KfSnackbar: React.FC<SnackbarProps> = ({
   _open,
   _message,
   _severity = 'info',
@@ -85,21 +85,21 @@ const CommonSnackbar: React.FC<SnackbarProps> = ({
   );
 };
 
-export default CommonSnackbar;
+export default KfSnackbar;
 
 /**
  * 使用例
  * 
  * ```tsx
  * import React, { useState } from 'react';
- * import CommonSnackbar from './Snackbar';
+ * import KfSnackbar from './Snackbar';
  * 
  * const Example = () => {
  *   const [open, setOpen] = useState(false);
  *   return (
  *     <>
  *       <button onClick={() => setOpen(true)}>Show Snackbar</button>
- *       <CommonSnackbar
+ *       <KfSnackbar
  *         _open={open}
  *         _message="保存しました"
  *         _severity="success"

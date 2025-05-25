@@ -5,7 +5,7 @@ import MuiAlert, { AlertProps as MuiAlertProps, AlertColor } from '@mui/material
 /**
  * 共通アラートコンポーネントのプロパティ
  */
-export interface AlertProps extends Omit<MuiAlertProps, 'title'> {
+export interface KfAlertProps extends Omit<MuiAlertProps, 'title'> {
   /**
    * アラートの種別（success, info, warning, error）
    * @default 'info'
@@ -41,22 +41,22 @@ export interface AlertProps extends Omit<MuiAlertProps, 'title'> {
 
 /**
  * 共通アラートコンポーネント
- * @param props AlertProps
+ * @param props KfAlertProps
  * @returns アラート表示
  * @example
  * ```tsx
- * <Alert _severity="success" _title="完了" _onClose={() => {}}>
+ * <KfAlert _severity="success" _title="完了" _onClose={() => {}}>
  *   データの保存に成功しました。
- * </Alert>
- * <Alert _severity="error" _title="エラー">
+ * </KfAlert>
+ * <KfAlert _severity="error" _title="エラー">
  *   保存に失敗しました。再度お試しください。
- * </Alert>
- * <Alert _severity="info">
+ * </KfAlert>
+ * <KfAlert _severity="info">
  *   お知らせがあります。
- * </Alert>
+ * </KfAlert>
  * ```
  */
-const Alert: React.FC<AlertProps> = ({
+const KfAlert: React.FC<KfAlertProps> = ({
   _severity = 'info',
   _title,
   _children,
@@ -81,4 +81,4 @@ const Alert: React.FC<AlertProps> = ({
   );
 };
 
-export default Alert;
+export default KfAlert;

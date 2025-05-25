@@ -73,7 +73,7 @@ export interface _CheckboxProps {
 /**
  * MUIのCheckboxをラップしたカスタムコンポーネント
  */
-export const MuiCheckbox: React.FC<_CheckboxProps> = ({
+export const KfCheckbox: React.FC<_CheckboxProps> = ({
   _checked,
   _onChange,
   _disabled = false,
@@ -150,14 +150,14 @@ export const MuiCheckbox: React.FC<_CheckboxProps> = ({
  * 使用例
  * 
  * ```tsx
- * import { MuiCheckbox } from './Checkbox';
+ * import { KfCheckbox } from './Checkbox';
  * import CheckIcon from '@mui/icons-material/Check';
  * import RemoveIcon from '@mui/icons-material/Remove';
  * 
  * // チェックボックスの状態管理
  * const [checked, setChecked] = React.useState(false);
  * 
- * <MuiCheckbox
+ * <KfCheckbox
  *   _checked={checked}
  *   _onChange={(_, v) => setChecked(v)}
  *   _label="利用規約に同意する"

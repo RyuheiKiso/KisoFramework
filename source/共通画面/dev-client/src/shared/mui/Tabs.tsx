@@ -83,7 +83,7 @@ export interface MuiTabsProps {
 /**
  * MUI Tabsラッパーコンポーネント
  */
-const MuiTabs: React.FC<MuiTabsProps> = ({
+const KfTabs: React.FC<MuiTabsProps> = ({
   _value,
   _onChange,
   _tabs,
@@ -158,13 +158,13 @@ const MuiTabs: React.FC<MuiTabsProps> = ({
   );
 };
 
-export default MuiTabs;
+export default KfTabs;
 
 /**
  * 使用例
  * 
  * ```tsx
- * import MuiTabs, { TabItem } from './Tabs';
+ * import KfTabs, { TabItem } from './Tabs';
  * import HomeIcon from '@mui/icons-material/Home';
  * import SettingsIcon from '@mui/icons-material/Settings';
  * 
@@ -184,7 +184,7 @@ export default MuiTabs;
  * };
  * 
  * // コンポーネントの利用
- * <MuiTabs
+ * <KfTabs
  *   _value={selected}
  *   _onChange={(_, v) => setSelected(v)}
  *   _tabs={tabList}
@@ -202,6 +202,6 @@ export default MuiTabs;
  *   _onTabClick={handleTabClick}
  * >
  *   <div>タブの下に表示する内容</div>
- * </MuiTabs>
+ * </KfTabs>
  * ```
  */
