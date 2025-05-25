@@ -116,11 +116,37 @@ flowchart TD
         gRPCServer-->|レスポンス|gRPC_HTTP
     end
 
-    style REST fill:#ffdddd,stroke:#c00,stroke-width:2px
-    style gRPC fill:#dde6ff,stroke:#0066cc,stroke-width:2px
+    %% RESTノードの色
+    style RESTClient fill:#ff6666,color:#fff,font-weight:bold
+    style REST_HTTP fill:#ff9999,color:#222
+    style REST_Data fill:#ffd6d6,color:#222
+    style REST_Endpoint fill:#ffb3b3,color:#222
+    style REST_Def fill:#ffeaea,color:#222
+    style REST_Stream fill:#ffb3b3,color:#222
+    style REST_Type fill:#ffd6d6,color:#222
+    style REST_Ext fill:#ffb3b3,color:#222
+    style RESTServer fill:#ff6666,color:#fff,font-weight:bold
+    style REST fill:#fff0f0,stroke:#c00,stroke-width:2px
+
+    %% gRPCノードの色
+    style gRPCClient fill:#3385ff,color:#fff,font-weight:bold
+    style gRPC_HTTP fill:#99c2ff,color:#222
+    style gRPC_Data fill:#e5f2ff,color:#222
+    style gRPC_Service fill:#b3d1ff,color:#222
+    style gRPC_Def fill:#eaf4ff,color:#222
+    style gRPC_Stream fill:#b3d1ff,color:#222
+    style gRPC_Type fill:#e5f2ff,color:#222
+    style gRPC_Ext fill:#b3d1ff,color:#222
+    style gRPCServer fill:#3385ff,color:#fff,font-weight:bold
+    style gRPC fill:#f0f6ff,stroke:#0066cc,stroke-width:2px
 
     %% 矢印の色を黒にする
     linkStyle default stroke:#222,stroke-width:1.5px,color:#222
+
+    %% 矢印コメントの背景色を灰色にする
+    classDef grayLabel fill:#eee,color:#222,stroke:none;
+    class RESTClient,REST_HTTP,REST_Data,REST_Endpoint,REST_Def,REST_Stream,REST_Type,REST_Ext,RESTServer grayLabel;
+    class gRPCClient,gRPC_HTTP,gRPC_Data,gRPC_Service,gRPC_Def,gRPC_Stream,gRPC_Type,gRPC_Ext,gRPCServer grayLabel;
 ```
 
 ### 違い
