@@ -26,8 +26,17 @@ src                                // プロジェクトのルートディレク
 │   │  │  └─ HomeLayout.tsx        // ホーム画面レイアウト
 │   │  ├─stores                    // 状態管理
 │   │  │  └─ homeStore.ts          // ホーム画面用状態管理
-│   │  └─types                     // 型定義
-│   │     └─ homeTypes.ts          // ホーム画面用型定義
+│   │  ├─types                     // 型定義
+│   │  │  └─ homeTypes.ts          // ホーム画面用型定義
+│   │  └─grpc                      // gRPC関連（ホーム画面用）
+│   │     ├─proto                  // gRPCプロトコル定義ファイル
+│   │     │  └─ home_service.proto // ホーム画面用gRPCサービス定義
+│   │     ├─client                 // gRPCクライアント実装
+│   │     │  ├─ HomeServiceClient.ts // ホーム画面用gRPCクライアント
+│   │     │  └─ index.ts           // クライアントエクスポート
+│   │     └─types                  // gRPC型定義
+│   │        ├─ home_pb.d.ts       // protoから生成された型定義
+│   │        └─ home_grpc_pb.d.ts  // サービス型定義
 │   └─login                        // ログイン画面関連
 │      ├─api                       // API通信関連の処理
 │      │  └─ loginApi.ts           // ログインAPI関数
@@ -40,8 +49,17 @@ src                                // プロジェクトのルートディレク
 │      │  └─ LoginLayout.tsx       // ログイン画面レイアウト
 │      ├─stores                    // 状態管理
 │      │  └─ loginStore.ts         // ログイン画面用状態管理
-│      └─types                     // 型定義
-│         └─ loginTypes.ts         // ログイン画面用型定義
+│      ├─types                     // 型定義
+│      │  └─ loginTypes.ts         // ログイン画面用型定義
+│      └─grpc                      // gRPC関連（ログイン画面用）
+│         ├─proto                  // gRPCプロトコル定義ファイル
+│         │  └─ login_service.proto // ログイン画面用gRPCサービス定義
+│         ├─client                 // gRPCクライアント実装
+│         │  ├─ LoginServiceClient.ts // ログイン画面用gRPCクライアント
+│         │  └─ index.ts           // クライアントエクスポート
+│         └─types                  // gRPC型定義
+│            ├─ login_pb.d.ts      // protoから生成された型定義
+│            └─ login_grpc_pb.d.ts // サービス型定義
 ├─shared                           // アプリ全体で共通利用するリソースやロジック
 │   ├─assets                       // 共通の画像やスタイル
 │   │  ├─ logo.svg                 // 共通ロゴ画像
