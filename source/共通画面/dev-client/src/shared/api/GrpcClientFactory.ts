@@ -38,9 +38,9 @@ export function createGrpcClient(
 import { createGrpcClient } from './GrpcClientFactory';
 
 const client = createGrpcClient(
-  'path/to/your.proto',
-  'yourPackage',
-  'YourService',
+  'path/to/test.proto',
+  'testPkg',
+  'TestService',
   'localhost:50051'
 );
 
