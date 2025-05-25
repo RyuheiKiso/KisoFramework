@@ -166,43 +166,52 @@ const KfTextField: React.FC<Props> = ({
   _children,
 }) => {
   // TextFieldコンポーネントを返却
-  return (
-    <TextField
-      label={_label}
-      value={_value}
-      onChange={_onChange}
-      type={_type}
-      disabled={_disabled}
-      error={_error}
-      helperText={_helperText}
-      placeholder={_placeholder}
-      required={_required}
-      inputProps={{ ..._inputProps, readOnly: _readOnly }}
-      autoFocus={_autoFocus}
-      InputProps={_InputProps}
-      InputLabelProps={_InputLabelProps}
-      FormHelperTextProps={_FormHelperTextProps}
-      SelectProps={_SelectProps}
-      defaultValue={_defaultValue}
-      color={_color}
-      name={_name}
-      onBlur={_onBlur}
-      onFocus={_onFocus}
-      inputRef={_inputRef}
-      autoComplete={_autoComplete}
-      rows={_rows}
-      select={_select}
-      children={_children}
-      multiline={_multiline}
-      minRows={_minRows}
-      maxRows={_maxRows}
-      size={_size}
-      fullWidth={_fullWidth}
-      variant={_variant}
-      id={_id}
-      data-testid={_dataTestId}
-    />
-  );
+  // Fragmentがchildrenに渡された場合は配列に変換
+  let children = _children;
+  if (React.isValidElement(_children) && _children.type === React.Fragment) {
+    const fragment = _children as React.ReactElement<{ children?: React.ReactNode }>;
+    children = React.Children.toArray(fragment.props.children);
+  }
+  // valueとdefaultValueの同時指定を避ける
+  const textFieldProps: any = {
+    label: _label,
+    onChange: _onChange,
+    type: _type,
+    disabled: _disabled,
+    error: _error,
+    helperText: _helperText,
+    placeholder: _placeholder,
+    required: _required,
+    inputProps: { ..._inputProps, readOnly: _readOnly },
+    autoFocus: _autoFocus,
+    InputProps: _InputProps,
+    InputLabelProps: _InputLabelProps,
+    FormHelperTextProps: _FormHelperTextProps,
+    SelectProps: _SelectProps,
+    color: _color,
+    name: _name,
+    onBlur: _onBlur,
+    onFocus: _onFocus,
+    inputRef: _inputRef,
+    autoComplete: _autoComplete,
+    rows: _rows,
+    select: _select,
+    children: children,
+    multiline: _multiline,
+    minRows: _minRows,
+    maxRows: _maxRows,
+    size: _size,
+    fullWidth: _fullWidth,
+    variant: _variant,
+    id: _id,
+    'data-testid': _dataTestId,
+  };
+  if (typeof _value !== 'undefined' && _value !== null) {
+    textFieldProps.value = _value;
+  } else if (typeof _defaultValue !== 'undefined') {
+    textFieldProps.defaultValue = _defaultValue;
+  }
+  return <TextField {...textFieldProps} />;
 };
 
 export default KfTextField;
