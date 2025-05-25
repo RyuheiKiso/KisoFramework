@@ -3,7 +3,36 @@ import React from 'react';
 import Button from '@mui/material/Button';
 
 /**
- * 共通MUIボタンのプロパティ型 
+ * 共通MUIボタンのプロパティ型
+ * @property _children ボタンに表示する内容（テキストや要素）
+ * @property _onClick クリック時のイベントハンドラ
+ * @property _variant ボタンのバリアント（'contained', 'outlined', 'text'）
+ * @property _color ボタンの色（'primary', 'secondary', 'inherit', 'success', 'error', 'info', 'warning'）
+ * @property _disabled ボタンの無効化（trueで非活性）
+ * @property _size ボタンのサイズ（'small', 'medium', 'large'）
+ * @property _fullWidth ボタンの幅を親要素いっぱいに広げるか
+ * @property _type ボタンの型（'button', 'submit', 'reset'）
+ * @property _startIcon ボタンの開始アイコン（左側）
+ * @property _endIcon ボタンの終了アイコン（右側）
+ * @property _className ボタンに付与する追加クラス名
+ * @property _style ボタンのスタイル（インラインCSS）
+ * @property _ariaLabel aria-label属性（アクセシビリティ用ラベル）
+ * @property _ariaControls aria-controls属性（制御対象ID）
+ * @property _ariaHaspopup aria-haspopup属性（ポップアップ有無）
+ * @property _ariaExpanded aria-expanded属性（展開状態）
+ * @property _autoFocus ボタンの自動フォーカス（初期表示時に自動でフォーカス）
+ * @property _id ボタンのID属性
+ * @property _name ボタンのname属性
+ * @property _form ボタンのform属性（フォームIDを指定）
+ * @property _value ボタンのvalue属性
+ * @property _title ボタンのtitle属性（ツールチップ等）
+ * @property _edge ボタンのedge属性（アイコンボタン用：'start' | 'end' | false）
+ * @property _disableElevation ボタンのdisableElevation属性（影の無効化）
+ * @property _disableFocusRipple ボタンのdisableFocusRipple属性（フォーカス時のリップル無効化）
+ * @property _disableRipple ボタンのdisableRipple属性（リップルエフェクト無効化）
+ * @property _tabIndex ボタンのtabIndex属性（タブ移動順）
+ * @property [data-*] ボタンのデータ属性（data-*）
+ * @property [key: string] その他のButtonProps（MUI Buttonの全プロパティを許容）
  */
 export interface MuiButtonProps {
   /** ボタンに表示する内容（テキストや要素） */
@@ -70,6 +99,17 @@ export interface MuiButtonProps {
  * 共通MUIボタンコンポーネント
  * @param props MuiButtonProps
  * @returns MUIボタン
+ * @example
+ * ```tsx
+ * <MuiButton
+ *   _children="保存"
+ *   _onClick={() => alert('保存しました')}
+ *   _variant="contained"
+ *   _color="primary"
+ *   _size="medium"
+ *   _fullWidth
+ * />
+ * ```
  */
 const MuiButton: React.FC<MuiButtonProps> = (props) => {
   return (
@@ -117,3 +157,24 @@ const MuiButton: React.FC<MuiButtonProps> = (props) => {
 };
 
 export default MuiButton;
+
+/**
+ * 使用例:
+ * 
+ * ```tsx
+ * import MuiButton from './shared/mui/button';
+ * import React from 'react';
+ * 
+ * const Example = () => (
+ *   <MuiButton
+ *     _children="送信"
+ *     _onClick={() => alert('送信しました')}
+ *     _variant="outlined"
+ *     _color="secondary"
+ *     _size="large"
+ *     _startIcon={<span>🚀</span>}
+ *     _fullWidth={false}
+ *   />
+ * );
+ * ```
+ */
