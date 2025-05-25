@@ -118,6 +118,9 @@ flowchart TD
 
     style REST fill:#ffdddd,stroke:#c00,stroke-width:2px
     style gRPC fill:#dde6ff,stroke:#0066cc,stroke-width:2px
+
+    %% 矢印の色を黒にする
+    linkStyle default stroke:#222,stroke-width:1.5px,color:#222
 ```
 
 ### 違い
