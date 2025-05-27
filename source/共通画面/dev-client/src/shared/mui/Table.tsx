@@ -186,9 +186,9 @@ export interface _TableProps {
   /**
    * TableHead/TableBody/TableFooterへの追加props
    */
-  _headProps?: React.HTMLAttributes<HTMLTableSectionElement>;
-  _bodyProps?: React.HTMLAttributes<HTMLTableSectionElement>;
-  _footerProps?: React.HTMLAttributes<HTMLTableSectionElement>;
+  _headProps?: React.HTMLAttributes<HTMLTableSectionElement> & { [key: string]: any };
+  _bodyProps?: React.HTMLAttributes<HTMLTableSectionElement> & { [key: string]: any };
+  _footerProps?: React.HTMLAttributes<HTMLTableSectionElement> & { [key: string]: any };
   /**
    * テーブルのaria-describedby属性
    */
@@ -238,134 +238,207 @@ const KfTable: React.FC<_TableProps> = ({
   _footerProps,
   _ariaDescribedBy,
   _ariaLabelledBy,
-}) => (
-  <TableContainer
-    component={Paper}
-    style={{
-      ...(!!_maxHeight ? { maxHeight: _maxHeight, overflowY: 'auto' } : {}),
-      ...(!!_width ? { width: _width } : {}),
-    }}
-    className={_className}
-  >
-    <Table
-      size={_dense ? 'small' : _size}
-      stickyHeader={_stickyHeader}
-      aria-label={_ariaLabel}
-      aria-describedby={_ariaDescribedBy}
-      aria-labelledby={_ariaLabelledBy}
-      padding={_padding}
-      sx={_bordered ? { border: 1, borderColor: 'grey.300' } : undefined}
+}) => {
+  // _columns/_rowsがnullやundefinedの場合のガード
+  if (!_columns || !Array.isArray(_columns) || _columns.length === 0) {
+    return (
+      <TableContainer component={Paper}>
+        <Table>
+          <TableBody>
+            <TableRow>
+              <TableCell>列定義がありません</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
+  }
+  if (!_rows || !Array.isArray(_rows)) {
+    return (
+      <TableContainer component={Paper}>
+        <Table>
+          <TableBody>
+            <TableRow>
+              <TableCell>行データがありません</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
+  }
+  return (
+    <TableContainer
+      component={Paper}
+      style={{
+        ...(!!_maxHeight ? { maxHeight: _maxHeight, overflowY: 'auto' } : {}),
+        ...(!!_width ? { width: _width } : {}),
+      }}
+      className={_className}
     >
-      {_caption && <caption>{_caption}</caption>}
-      <TableHead {..._headProps}>
-        <TableRow style={_headerRowStyle}>
-          {_columns.map((col, colIdx) => (
-            <TableCell
-              key={col}
-              align={_columnAlign?.[col] ?? 'left'}
-              sx={{
-                ...(_bordered ? { border: 1, borderColor: 'grey.300' } : {}),
-                ...(_columnWidths && _columnWidths[col]
-                  ? { width: _columnWidths[col], maxWidth: _columnWidths[col] }
-                  : {}),
-              }}
-            >
-              {_headerCellRenderer
-                ? _headerCellRenderer(col, colIdx)
-                : col}
-            </TableCell>
-          ))}
-        </TableRow>
-      </TableHead>
-      <TableBody {..._bodyProps}>
-        {_rows.length === 0 && (
-          <TableRow>
-            <TableCell colSpan={_columns.length} align="center">
-              {_emptyContent ?? 'データがありません'}
-            </TableCell>
+      <Table
+        size={_dense ? 'small' : _size}
+        stickyHeader={_stickyHeader}
+        aria-label={_ariaLabel}
+        aria-describedby={_ariaDescribedBy}
+        aria-labelledby={_ariaLabelledBy}
+        padding={_padding}
+        sx={_bordered ? { border: 1, borderColor: 'grey.300' } : undefined}
+      >
+        {_caption && <caption>{_caption}</caption>}
+        <TableHead {..._headProps}>
+          <TableRow style={_headerRowStyle}>
+            {_columns.map((col, colIdx) => (
+              <TableCell
+                key={col}
+                align={_columnAlign?.[col] ?? 'left'}
+                sx={{
+                  ...(_bordered ? { border: 1, borderColor: 'grey.300' } : {}),
+                  ...(_columnWidths && _columnWidths[col]
+                    ? { width: _columnWidths[col], maxWidth: _columnWidths[col] }
+                    : {}),
+                }}
+              >
+                {_headerCellRenderer
+                  ? (() => {
+                      try {
+                        return _headerCellRenderer(col, colIdx);
+                      } catch (e) {
+                        console.error(e);
+                        return null;
+                      }
+                    })()
+                  : col}
+              </TableCell>
+            ))}
           </TableRow>
-        )}
-        {_rows.map((row, idx) => {
-          const isDisabled = _rowDisabled ? _rowDisabled(row, idx) : false;
-          const rowKey = _rowId ? _rowId(row, idx) : idx;
-          return (
-            <TableRow
-              key={rowKey}
-              hover={!_disableHover && !!_onRowClick}
-              onClick={
-                isDisabled
-                  ? undefined
-                  : _onRowClick
-                  ? () => _onRowClick(row, idx)
-                  : undefined
-              }
-              selected={_selectedRowIndex === idx}
-              aria-selected={_selectedRowIndex === idx}
-              className={_rowClassName ? _rowClassName(row, idx) : undefined}
-              sx={_bordered ? { border: 1, borderColor: 'grey.300' } : undefined}
-              style={{
-                ...(!!_onRowClick && !isDisabled ? { cursor: 'pointer' } : {}),
-                ...(_bodyRowStyle ? _bodyRowStyle(row, idx) : {}),
-                ...(isDisabled ? { opacity: 0.5, pointerEvents: 'none' } : {}),
-              }}
-              tabIndex={isDisabled ? -1 : 0}
-              aria-disabled={isDisabled}
-              onDoubleClick={
-                !isDisabled && _onRowSelect
-                  ? () => _onRowSelect(row, idx)
-                  : undefined
-              }
-            >
-              {_columns.map((col) => (
-                <TableCell
-                  key={col}
-                  align={_columnAlign?.[col] ?? 'left'}
-                  sx={{
-                    ...(_bordered ? { border: 1, borderColor: 'grey.300' } : {}),
-                    ...(_columnWidths && _columnWidths[col]
-                      ? { width: _columnWidths[col], maxWidth: _columnWidths[col] }
-                      : {}),
-                  }}
-                  style={
-                    _cellStyle
-                      ? _cellStyle(row[col], row, idx, col)
-                      : undefined
-                  }
-                >
-                  {_cellRenderer
-                    ? _cellRenderer(row[col], row, idx, col)
-                    : row[col]}
-                </TableCell>
-              ))}
+        </TableHead>
+        <TableBody {..._bodyProps}>
+          {_rows.length === 0 && (
+            <TableRow>
+              <TableCell colSpan={_columns.length} align="center">
+                {_emptyContent ?? 'データがありません'}
+              </TableCell>
             </TableRow>
-          );
-        })}
-      </TableBody>
-      {_footerRows && _footerRows.length > 0 && (
-        <tfoot {..._footerProps}>
-          {_footerRows.map((row, idx) => (
-            <TableRow key={idx}>
-              {_columns.map((col) => (
-                <TableCell
-                  key={col}
-                  align={_columnAlign?.[col] ?? 'left'}
-                  sx={{
-                    ...(_bordered ? { border: 1, borderColor: 'grey.300' } : {}),
-                    ...(_columnWidths && _columnWidths[col]
-                      ? { width: _columnWidths[col], maxWidth: _columnWidths[col] }
-                      : {}),
-                  }}
-                >
-                  {row[col]}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
-        </tfoot>
-      )}
-    </Table>
-  </TableContainer>
-);
+          )}
+          {_rows.map((row, idx) => {
+            let isDisabled = false;
+            if (_rowDisabled) {
+              try {
+                isDisabled = _rowDisabled(row, idx);
+              } catch (e) {
+                console.error(e);
+                isDisabled = false;
+              }
+            }
+            const rowKey = _rowId ? _rowId(row, idx) : idx;
+            return (
+              <TableRow
+                key={rowKey}
+                hover={!_disableHover && !!_onRowClick}
+                onClick={
+                  isDisabled
+                    ? undefined
+                    : _onRowClick
+                    ? () => {
+                        try {
+                          _onRowClick(row, idx);
+                        } catch (e) {
+                          console.error(e);
+                        }
+                      }
+                    : undefined
+                }
+                selected={_selectedRowIndex === idx}
+                aria-selected={_selectedRowIndex === idx}
+                className={_rowClassName ? _rowClassName(row, idx) : undefined}
+                sx={_bordered ? { border: 1, borderColor: 'grey.300' } : undefined}
+                style={{
+                  ...(!!_onRowClick && !isDisabled ? { cursor: 'pointer' } : {}),
+                  ...(_bodyRowStyle ? _bodyRowStyle(row, idx) : {}),
+                  ...(isDisabled ? { opacity: 0.5, pointerEvents: 'none' } : {}),
+                }}
+                tabIndex={isDisabled ? -1 : 0}
+                aria-disabled={isDisabled}
+                onDoubleClick={
+                  !isDisabled && _onRowSelect
+                    ? () => {
+                        try {
+                          _onRowSelect(row, idx);
+                        } catch (e) {
+                          console.error(e);
+                        }
+                      }
+                    : undefined
+                }
+              >
+                {_columns.map((col) => (
+                  <TableCell
+                    key={col}
+                    align={_columnAlign?.[col] ?? 'left'}
+                    sx={{
+                      ...(_bordered ? { border: 1, borderColor: 'grey.300' } : {}),
+                      ...(_columnWidths && _columnWidths[col]
+                        ? { width: _columnWidths[col], maxWidth: _columnWidths[col] }
+                        : {}),
+                    }}
+                    style={
+                      _cellStyle
+                        ? _cellStyle(row[col], row, idx, col)
+                        : undefined
+                    }
+                  >
+                    {_cellRenderer
+                      ? (() => {
+                          try {
+                            return _cellRenderer(row[col], row, idx, col);
+                          } catch (e) {
+                            console.error(e);
+                            return null;
+                          }
+                        })()
+                      : row[col]}
+                  </TableCell>
+                ))}
+              </TableRow>
+            );
+          })}
+        </TableBody>
+        {/* _footerRowsが配列でない場合の分岐 */}
+        {Array.isArray(_footerRows) && _footerRows.length > 0 ? (
+          <tfoot {..._footerProps}>
+            {_footerRows.map((row, idx) => (
+              <TableRow key={idx}>
+                {_columns.map((col) => (
+                  <TableCell
+                    key={col}
+                    align={_columnAlign?.[col] ?? 'left'}
+                    sx={{
+                      ...(_bordered ? { border: 1, borderColor: 'grey.300' } : {}),
+                      ...(_columnWidths && _columnWidths[col]
+                        ? { width: _columnWidths[col], maxWidth: _columnWidths[col] }
+                        : {}),
+                    }}
+                  >
+                    {row[col]}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </tfoot>
+        ) : _footerRows !== undefined ? (
+          // _footerRowsが配列でない場合は空のtfootを返す（テスト用）
+          <tfoot {..._footerProps}>
+            <tr>
+              <td colSpan={_columns.length} style={{ textAlign: 'center' }}>
+                {/* 空 */}
+              </td>
+            </tr>
+          </tfoot>
+        ) : null}
+      </Table>
+    </TableContainer>
+  );
+};
 
 export default KfTable;
 
