@@ -393,4 +393,153 @@ describe('KfTextField', () => {
     );
     expect(screen.getByLabelText('行数')).toHaveAttribute('rows', '5');
   });
+
+  it('valueもdefaultValueも未指定の場合は空文字になる', () => {
+    render(
+      <KfTextField
+        _label="空"
+        _value={undefined as any}
+        _onChange={() => {}}
+      />
+    );
+    expect(screen.getByLabelText('空')).toHaveValue('');
+  });
+
+  it('valueがnullの場合はdefaultValueが反映される', () => {
+    render(
+      <KfTextField
+        _label="null値"
+        _value={null as any}
+        _defaultValue="def"
+        _onChange={() => {}}
+      />
+    );
+    // valueがnullでもdefaultValueが反映される
+    expect(screen.getByLabelText('null値')).toHaveValue('def');
+  });
+
+  it('valueがundefinedの場合はdefaultValueが反映される', () => {
+    render(
+      <KfTextField
+        _label="undefined値"
+        _value={undefined as any}
+        _defaultValue="def2"
+        _onChange={() => {}}
+      />
+    );
+    expect(screen.getByLabelText('undefined値')).toHaveValue('def2');
+  });
+
+  it('childrenがnullの場合でもエラーにならない', () => {
+    render(
+      <KfTextField
+        _label="null子"
+        _value=""
+        _onChange={() => {}}
+        _children={null}
+        // _selectは指定しない
+      />
+    );
+    expect(screen.getByLabelText('null子')).toBeInTheDocument();
+  });
+
+  it('childrenがundefinedの場合でもエラーにならない', () => {
+    render(
+      <KfTextField
+        _label="undefined子"
+        _value=""
+        _onChange={() => {}}
+        _children={undefined}
+        // _selectは指定しない
+      />
+    );
+    expect(screen.getByLabelText('undefined子')).toBeInTheDocument();
+  });
+
+  it('childrenが空配列の場合でもエラーにならない', () => {
+    render(
+      <KfTextField
+        _label="空配列子"
+        _value=""
+        _onChange={() => {}}
+        _children={[]}
+        // _selectは指定しない
+      />
+    );
+    expect(screen.getByLabelText('空配列子')).toBeInTheDocument();
+  });
+
+  it('childrenがFragmentの場合でもエラーにならない', () => {
+    render(
+      <KfTextField
+        _label="フラグメント子"
+        _value=""
+        _onChange={() => {}}
+        _children={
+          <React.Fragment>
+            <MenuItem value="1">A</MenuItem>
+            <MenuItem value="2">B</MenuItem>
+          </React.Fragment>
+        }
+        _select
+      />
+    );
+    expect(screen.getByLabelText('フラグメント子')).toBeInTheDocument();
+  });
+
+  it('inputPropsとreadOnly両方指定時に両方反映される', () => {
+    render(
+      <KfTextField
+        _label="inputProps+readOnly"
+        _value="abc"
+        _onChange={() => {}}
+        _inputProps={{ maxLength: 10 }}
+        _readOnly
+      />
+    );
+    const input = screen.getByLabelText('inputProps+readOnly');
+    expect(input).toHaveAttribute('maxlength', '10');
+    expect(input).toHaveAttribute('readonly');
+  });
+
+  it('inputPropsのみ指定時に反映される', () => {
+    render(
+      <KfTextField
+        _label="inputPropsのみ"
+        _value="abc"
+        _onChange={() => {}}
+        _inputProps={{ maxLength: 8 }}
+      />
+    );
+    const input = screen.getByLabelText('inputPropsのみ');
+    expect(input).toHaveAttribute('maxlength', '8');
+    expect(input).not.toHaveAttribute('readonly');
+  });
+
+  it('readOnlyのみ指定時に反映される', () => {
+    render(
+      <KfTextField
+        _label="readOnlyのみ"
+        _value="abc"
+        _onChange={() => {}}
+        _readOnly
+      />
+    );
+    const input = screen.getByLabelText('readOnlyのみ');
+    expect(input).toHaveAttribute('readonly');
+  });
+
+  it('inputPropsもreadOnlyも未指定時はinputPropsがundefined', () => {
+    render(
+      <KfTextField
+        _label="inputProps未指定"
+        _value="abc"
+        _onChange={() => {}}
+      />
+    );
+    const input = screen.getByLabelText('inputProps未指定');
+    // 特に属性が付与されていないことを確認
+    expect(input).not.toHaveAttribute('maxlength');
+    expect(input).not.toHaveAttribute('readonly');
+  });
 });
