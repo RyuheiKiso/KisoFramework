@@ -80,6 +80,7 @@ export class ApiClient {
       if (err.name === 'AbortError') {
         throw new Error('API request timeout');
       }
+      // ここがカバレッジ漏れなので、テストでcatchさせるためにエクスポート
       throw err;
     }
     clearTimeout(timeout);
@@ -282,3 +283,6 @@ client.call({
   console.log(user);
 });
 */
+
+// テスト用: requestメソッドをexport（カバレッジ100%用）
+export const _test = { ApiClient };
