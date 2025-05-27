@@ -14,7 +14,7 @@ export interface _CheckboxProps {
   /** 無効化フラグ（true: 無効, false: 有効） */
   _disabled?: boolean;
   /** ラベルテキスト */
-  _label?: string;
+  _label?: React.ReactNode;
   /** チェックボックスの色（primary, secondary, default, error, info, success, warning） */
   _color?: 'primary' | 'secondary' | 'default' | 'error' | 'info' | 'success' | 'warning';
   /** チェックボックスのサイズ（small, medium） */
@@ -111,19 +111,34 @@ export const KfCheckbox: React.FC<_CheckboxProps> = ({
   const innerInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const input = (innerInputRef.current || (_inputRef && typeof _inputRef !== 'function' ? _inputRef.current : null));
-    if (input && typeof _indeterminate === 'boolean') {
-      input.indeterminate = _indeterminate;
+    let input: HTMLInputElement | null = null;
+    if (innerInputRef.current) {
+      input = innerInputRef.current;
+    } 
+    if (input) {
+      if (typeof _indeterminate === 'boolean') {
+        input.indeterminate = _indeterminate;
+      } else {
+        input.indeterminate = false;
+      }
     }
   }, [_indeterminate, _inputRef]);
+
+  // _color, _size の値が不正な場合はデフォルト値にフォールバック
+  const allowedColors = ['primary', 'secondary', 'default', 'error', 'info', 'success', 'warning'];
+  const allowedSizes = ['small', 'medium'];
+  const safeColor =
+    allowedColors.includes(_color as any) ? _color : 'primary';
+  const safeSize =
+    allowedSizes.includes(_size as any) ? _size : 'medium';
 
   const checkboxNode = (
     <Checkbox
       checked={_checked}
       onChange={_onChange}
       disabled={_disabled}
-      color={_color}
-      size={_size}
+      color={safeColor as any}
+      size={safeSize as any}
       id={_id}
       name={_name}
       value={_value}
@@ -136,15 +151,20 @@ export const KfCheckbox: React.FC<_CheckboxProps> = ({
         ...(typeof _ariaDescribedby !== 'undefined' && { 'aria-describedby': _ariaDescribedby }),
         ...(typeof _tabIndex !== 'undefined' && { tabIndex: _tabIndex }),
         ...(typeof _required !== 'undefined' && { required: _required }),
-        ...(typeof _onFocus !== 'undefined' && { onFocus: _onFocus }),
-        ...(typeof _onBlur !== 'undefined' && { onBlur: _onBlur }),
+        // onFocus/onBlurはundefinedの場合は渡さない
+        ...(typeof _onFocus === 'function' && { onFocus: _onFocus }),
+        ...(typeof _onBlur === 'function' && { onBlur: _onBlur }),
       }}
       inputRef={(el: HTMLInputElement) => {
         innerInputRef.current = el;
-        if (typeof _inputRef === 'function') _inputRef(el);
-        else if (_inputRef && typeof _inputRef !== 'function') (_inputRef as React.MutableRefObject<HTMLInputElement | null>).current = el;
+        if (typeof _inputRef === 'function') {
+          _inputRef(el);
+        } else if (_inputRef && typeof _inputRef !== 'function' && 'current' in _inputRef) {
+          (_inputRef as React.MutableRefObject<HTMLInputElement | null>).current = el;
+        }
       }}
-      onClick={_onClick}
+      // onClickはundefinedの場合は渡さない
+      {...(_onClick ? { onClick: _onClick } : {})}
       indeterminate={_indeterminate}
       icon={_icon}
       checkedIcon={_checkedIcon}
@@ -156,14 +176,39 @@ export const KfCheckbox: React.FC<_CheckboxProps> = ({
     />
   );
 
-  if (_label) {
+  // ラベルがnull/undefined/空文字/false/trueの場合はFormControlLabelを使わずCheckboxのみ返す
+  if (
+    _label !== null &&
+    _label !== undefined &&
+    _label !== '' &&
+    _label !== false &&
+    _label !== true
+  ) {
+    // NaNの場合は文字列化して渡す
+    const labelContent =
+      typeof _label === 'number' && isNaN(_label) ? String(_label) : _label;
+    const labelNode = (
+      <span
+        className={_labelClassName || undefined}
+        style={_labelStyle || undefined}
+        data-testid="checkbox-label"
+      >
+        {labelContent}
+      </span>
+    );
+    if (_labelPlacement === 'start') {
+      return (
+        <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+          {labelNode}
+          {checkboxNode}
+        </span>
+      );
+    }
     return (
       <FormControlLabel
         control={checkboxNode}
-        label={_label}
+        label={labelNode}
         labelPlacement={_labelPlacement}
-        classes={{ label: _labelClassName }}
-        sx={_labelStyle ? { '& .MuiFormControlLabel-label': _labelStyle } : undefined}
       />
     );
   }
@@ -210,4 +255,5 @@ export const KfCheckbox: React.FC<_CheckboxProps> = ({
  *   _autoFocus={false}
  *   _required={true}
  *   // _inputRef={ref => {/* 任意のref処理 */ /*}}
+ * ```
  */

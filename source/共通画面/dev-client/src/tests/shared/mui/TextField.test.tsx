@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import KfTextField from '../../../shared/mui/TextField';
+import MenuItem from '@mui/material/MenuItem';
 
 describe('KfTextField', () => {
   it('ラベルと値が正しく表示される', () => {
@@ -284,9 +285,10 @@ describe('KfTextField', () => {
         _value="2"
         _onChange={() => {}}
         _select
+        // 警告回避のためMenuItemを使用
         _children={[
-          <option value="1" key="1">A</option>,
-          <option value="2" key="2">B</option>
+          <MenuItem value="1" key="1">A</MenuItem>,
+          <MenuItem value="2" key="2">B</MenuItem>
         ]}
       />
     );
@@ -369,7 +371,8 @@ describe('KfTextField', () => {
         _value="1"
         _onChange={() => {}}
         _select
-        _children={<option value="1">A</option>}
+        // 警告回避のためMenuItemを使用
+        _children={<MenuItem value="1">A</MenuItem>}
         _SelectProps={{ 'data-select': 'bar' }}
       />
     );
