@@ -165,12 +165,26 @@ const KfTextField: React.FC<Props> = ({
   _select = false,
   _children,
 }) => {
-  // TextFieldコンポーネントを返却
   // Fragmentがchildrenに渡された場合は配列に変換
   let children = _children;
   if (React.isValidElement(_children) && _children.type === React.Fragment) {
     const fragment = _children as React.ReactElement<{ children?: React.ReactNode }>;
     children = React.Children.toArray(fragment.props.children);
+  } else if (_children === null || _children === undefined) {
+    children = undefined;
+  } else if (Array.isArray(_children) && _children.length === 0) {
+    children = undefined;
+  }
+  // inputProps生成: _inputProps/_readOnlyの有無で分岐
+  let inputProps;
+  if (_inputProps && typeof _readOnly !== 'undefined') {
+    inputProps = { ..._inputProps, readOnly: _readOnly };
+  } else if (_inputProps) {
+    inputProps = { ..._inputProps };
+  } else if (typeof _readOnly !== 'undefined') {
+    inputProps = { readOnly: _readOnly };
+  } else {
+    inputProps = undefined;
   }
   // valueとdefaultValueの同時指定を避ける
   const textFieldProps: any = {
@@ -182,7 +196,7 @@ const KfTextField: React.FC<Props> = ({
     helperText: _helperText,
     placeholder: _placeholder,
     required: _required,
-    inputProps: { ..._inputProps, readOnly: _readOnly },
+    inputProps,
     autoFocus: _autoFocus,
     InputProps: _InputProps,
     InputLabelProps: _InputLabelProps,
@@ -211,6 +225,7 @@ const KfTextField: React.FC<Props> = ({
   } else if (typeof _defaultValue !== 'undefined') {
     textFieldProps.defaultValue = _defaultValue;
   }
+  // valueもdefaultValueも未指定の場合は両方渡さない
   return <TextField {...textFieldProps} />;
 };
 
