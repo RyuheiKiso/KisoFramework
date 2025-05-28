@@ -81,7 +81,7 @@ flowchart TD
     App[アプリケーション]
     API[SQLite API]
     Engine[SQLエンジン]
-    Storage[ストレージ(ファイル)]
+    Storage["ストレージ(ファイル)"]
     App --> API --> Engine --> Storage
 ```
 
