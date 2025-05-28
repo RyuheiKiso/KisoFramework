@@ -267,31 +267,208 @@ graph TD
 
 ### useState
 
-状態管理用フックである。
+状態管理用フックである。  
+関数コンポーネント内で状態（state）を持つことができる。
+
+#### 基本構文
+
+```jsx
+const [state, setState] = useState(初期値);
+```
+
+#### 例
+
+```jsx
+import { useState } from 'react';
+function Counter() {
+  const [count, setCount] = useState(0);
+  return <button onClick={() => setCount(count + 1)}>{count}</button>;
+}
+```
+
+- `useState`は配列（[現在の値, 更新関数]）を返す。
+- 状態の更新は非同期で行われる。
+- 前回の値を参照して更新する場合は、関数型で渡す。
+
+```jsx
+setCount(prev => prev + 1);
+```
+
+---
 
 ### useEffect
 
-副作用処理用フックである。
+副作用処理用フックである。  
+データ取得や購読、DOMの直接操作など、レンダリング以外の処理を記述する。
+
+#### 基本構文
+
+```jsx
+useEffect(() => {
+  // 副作用処理
+  return () => {
+    // クリーンアップ処理（アンマウント時）
+  };
+}, [依存値]);
+```
+
+#### 例
+
+```jsx
+import { useEffect, useState } from 'react';
+function Timer() {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setCount(c => c + 1), 1000);
+    return () => clearInterval(id);
+  }, []);
+  return <div>{count}</div>;
+}
+```
+
+- 依存配列が空の場合、マウント時のみ実行される。
+- 依存値が変化するたびに再実行される。
+- クリーンアップ関数はアンマウント時や依存値変更時に呼ばれる。
+
+---
 
 ### useContext
 
-グローバルな値を扱うフックである。
+グローバルな値を扱うフックである。  
+Context APIと組み合わせて、ツリー全体に値を渡す。
+
+#### 基本構文
+
+```jsx
+const value = useContext(MyContext);
+```
+
+#### 例
+
+```jsx
+import React, { createContext, useContext } from 'react';
+
+const ThemeContext = createContext('light');
+
+function ThemedButton() {
+  const theme = useContext(ThemeContext);
+  return <button className={theme}>ボタン</button>;
+}
+
+function App() {
+  return (
+    <ThemeContext.Provider value="dark">
+      <ThemedButton />
+    </ThemeContext.Provider>
+  );
+}
+```
+
+- Providerで指定した値が、ツリー内のどこからでも取得できる。
+- グローバルな状態管理やテーマ切り替えなどに利用される。
+
+---
 
 ### useRef
 
-DOM参照や値の保持に利用する。
+DOM参照や値の保持に利用する。  
+再レンダリングを発生させずに値を保持したい場合に使う。
+
+#### 基本構文
+
+```jsx
+const ref = useRef(初期値);
+```
+
+#### 例（DOM参照）
+
+```jsx
+import { useRef } from 'react';
+function InputFocus() {
+  const inputRef = useRef(null);
+  const handleClick = () => {
+    inputRef.current.focus();
+  };
+  return (
+    <>
+      <input ref={inputRef} />
+      <button onClick={handleClick}>フォーカス</button>
+    </>
+  );
+}
+```
+
+#### 例（値の保持）
+
+```jsx
+const countRef = useRef(0);
+countRef.current += 1;
+```
+
+- `ref.current`で値やDOM要素にアクセスできる。
+- 値の変更では再レンダリングされない。
+
+---
 
 ### useMemo
 
-値のメモ化に利用する。
+値のメモ化に利用する。  
+計算コストの高い処理の結果をキャッシュし、依存値が変わった時のみ再計算する。
+
+#### 基本構文
+
+```jsx
+const memoizedValue = useMemo(() => 計算処理, [依存値]);
+```
+
+#### 例
+
+```jsx
+import { useMemo, useState } from 'react';
+function ExpensiveComponent({ num }) {
+  const result = useMemo(() => {
+    // 重い計算
+    let sum = 0;
+    for (let i = 0; i < 1e7; i++) sum += i;
+    return sum + num;
+  }, [num]);
+  return <div>{result}</div>;
+}
+```
+
+- 依存値が変わらない限り、前回の計算結果を再利用する。
+
+---
 
 ### useCallback
 
-関数のメモ化に利用する。
+関数のメモ化に利用する。  
+依存値が変わらない限り、同じ関数インスタンスを返す。
 
-### カスタムフック
+#### 基本構文
 
-独自のフックを作成しロジックを再利用できる。
+```jsx
+const memoizedCallback = useCallback(() => {
+  // コールバック処理
+}, [依存値]);
+```
+
+#### 例
+
+```jsx
+import { useState, useCallback } from 'react';
+function Parent() {
+  const [count, setCount] = useState(0);
+  const handleClick = useCallback(() => setCount(c => c + 1), []);
+  return <Child onClick={handleClick} />;
+}
+function Child({ onClick }) {
+  return <button onClick={onClick}>クリック</button>;
+}
+```
+
+- 子コンポーネントにコールバックを渡す際、不要な再レンダリングを防ぐために使う。
+- `useMemo`は値のメモ化、`useCallback`は関数のメモ化。
 
 ---
 
